@@ -13,7 +13,7 @@
 #import "FXCommon.h"
 #import "FXUtils.h"
 #import "FXCapabilities.h"
-#import "Flox+Internal.h"
+#import "Flox_Internal.h"
 
 static NSString *const FXKeyGameVersion = @"gameVersion";
 static NSString *const FXKeyFirstStartTime = @"firstStartTime";

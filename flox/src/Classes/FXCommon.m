@@ -19,6 +19,10 @@ NSString *const FXExceptionFileInvalid          = @"FileInvalid";
 NSString *const FXExceptionDataInvalid          = @"DataInvalid";
 NSString *const FXExceptionOperationFailed      = @"OperationFailed";
 
+NSString *const FXAccessNone      = @"";
+NSString *const FXAccessRead      = @"r";
+NSString *const FXAccessReadWrite = @"rw";
+
 NSString *const FXHTTPMethodGet     = @"GET";
 NSString *const FXHTTPMethodPut     = @"PUT";
 NSString *const FXHTTPMethodPost    = @"POST";

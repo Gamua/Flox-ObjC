@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		DE0367F418042D7400C16280 /* FXUtilsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DE0367F318042D7400C16280 /* FXUtilsTests.m */; };
 		DE0367FB18044A9400C16280 /* FXRestService.m in Sources */ = {isa = PBXBuildFile; fileRef = DE0367FA18044A9400C16280 /* FXRestService.m */; };
+		DE148471182A9CD3001DB4A1 /* FXEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = DE148470182A9CD3001DB4A1 /* FXEntity.m */; };
+		DE148476182AE542001DB4A1 /* FXEntityTest.m in Sources */ = {isa = PBXBuildFile; fileRef = DE148475182AE542001DB4A1 /* FXEntityTest.m */; };
+		DE14847A182AE5F7001DB4A1 /* CustomEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = DE148479182AE5F7001DB4A1 /* CustomEntity.m */; };
 		DE204EFA181E664700FD9220 /* FXPersistentQueueTest.m in Sources */ = {isa = PBXBuildFile; fileRef = DE204EF9181E664700FD9220 /* FXPersistentQueueTest.m */; };
 		DE204EFC181EA8C900FD9220 /* FXScoreTest.m in Sources */ = {isa = PBXBuildFile; fileRef = DE204EFB181EA8C900FD9220 /* FXScoreTest.m */; };
 		DE29B40C181E460000242381 /* FXUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = DE29B40B181E460000242381 /* FXUtils.m */; };
@@ -58,13 +61,19 @@
 
 /* Begin PBXFileReference section */
 		DE0367F318042D7400C16280 /* FXUtilsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXUtilsTests.m; sourceTree = "<group>"; };
-		DE0367F61804390A00C16280 /* Flox+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Flox+Internal.h"; sourceTree = "<group>"; };
+		DE0367F61804390A00C16280 /* Flox_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flox_Internal.h; sourceTree = "<group>"; };
 		DE0367F918044A9400C16280 /* FXRestService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXRestService.h; sourceTree = "<group>"; };
 		DE0367FA18044A9400C16280 /* FXRestService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXRestService.m; sourceTree = "<group>"; };
+		DE14846F182A9CD3001DB4A1 /* FXEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXEntity.h; sourceTree = "<group>"; };
+		DE148470182A9CD3001DB4A1 /* FXEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXEntity.m; sourceTree = "<group>"; };
+		DE148475182AE542001DB4A1 /* FXEntityTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXEntityTest.m; sourceTree = "<group>"; };
+		DE148478182AE5F7001DB4A1 /* CustomEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomEntity.h; sourceTree = "<group>"; };
+		DE148479182AE5F7001DB4A1 /* CustomEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomEntity.m; sourceTree = "<group>"; };
 		DE204EF9181E664700FD9220 /* FXPersistentQueueTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXPersistentQueueTest.m; sourceTree = "<group>"; };
 		DE204EFB181EA8C900FD9220 /* FXScoreTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXScoreTest.m; sourceTree = "<group>"; };
 		DE29B40A181E460000242381 /* FXUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXUtils.h; sourceTree = "<group>"; };
 		DE29B40B181E460000242381 /* FXUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXUtils.m; sourceTree = "<group>"; };
+		DE3CE634182F79B2001EFB6F /* FXEntity_Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FXEntity_Internal.h; sourceTree = "<group>"; };
 		DE4940F5181EC85D00FBD160 /* NSString+Flox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Flox.h"; sourceTree = "<group>"; };
 		DE4940F6181EC85D00FBD160 /* NSString+Flox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Flox.m"; sourceTree = "<group>"; };
 		DE6BF26218101EFB004F80FA /* FXURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXURLConnection.h; sourceTree = "<group>"; };
@@ -134,7 +143,8 @@
 		DE0367F5180438F000C16280 /* Internal */ = {
 			isa = PBXGroup;
 			children = (
-				DE0367F61804390A00C16280 /* Flox+Internal.h */,
+				DE0367F61804390A00C16280 /* Flox_Internal.h */,
+				DE3CE634182F79B2001EFB6F /* FXEntity_Internal.h */,
 				DE0367F918044A9400C16280 /* FXRestService.h */,
 				DE0367FA18044A9400C16280 /* FXRestService.m */,
 				DE6BF26218101EFB004F80FA /* FXURLConnection.h */,
@@ -149,6 +159,15 @@
 				DE90F65E1822A1CE00632993 /* FXInstallationData.m */,
 			);
 			name = Internal;
+			sourceTree = "<group>";
+		};
+		DE148477182AE5D7001DB4A1 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				DE148478182AE5F7001DB4A1 /* CustomEntity.h */,
+				DE148479182AE5F7001DB4A1 /* CustomEntity.m */,
+			);
+			name = Utils;
 			sourceTree = "<group>";
 		};
 		DE795C1117FC655800FECA2E = {
@@ -193,6 +212,8 @@
 				DEB702471811192B000D295E /* FXScore.m */,
 				DE29B40A181E460000242381 /* FXUtils.h */,
 				DE29B40B181E460000242381 /* FXUtils.m */,
+				DE14846F182A9CD3001DB4A1 /* FXEntity.h */,
+				DE148470182A9CD3001DB4A1 /* FXEntity.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -200,6 +221,7 @@
 		DE795C3317FC655900FECA2E /* UnitTests */ = {
 			isa = PBXGroup;
 			children = (
+				DE148477182AE5D7001DB4A1 /* Utils */,
 				DE795C3417FC655900FECA2E /* Supporting Files */,
 				DEB7024C18111FDC000D295E /* FXTest.h */,
 				DEB7024D18111FDC000D295E /* FXTest.m */,
@@ -207,6 +229,7 @@
 				DE6BF265181021A2004F80FA /* FXURLConnectionTests.m */,
 				DE204EF9181E664700FD9220 /* FXPersistentQueueTest.m */,
 				DE204EFB181EA8C900FD9220 /* FXScoreTest.m */,
+				DE148475182AE542001DB4A1 /* FXEntityTest.m */,
 			);
 			path = UnitTests;
 			sourceTree = "<group>";
@@ -305,6 +328,7 @@
 				DE29B40C181E460000242381 /* FXUtils.m in Sources */,
 				DEED94BD180EE36F009C30A0 /* FXCommon.m in Sources */,
 				DE6BF26418101EFB004F80FA /* FXURLConnection.m in Sources */,
+				DE148471182A9CD3001DB4A1 /* FXEntity.m in Sources */,
 				DE4940F7181EC85D00FBD160 /* NSString+Flox.m in Sources */,
 				DE795C2517FC655900FECA2E /* Flox.m in Sources */,
 				DE90F65918228FD000632993 /* FXGameSession.m in Sources */,
@@ -321,10 +345,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE148476182AE542001DB4A1 /* FXEntityTest.m in Sources */,
 				DE204EFA181E664700FD9220 /* FXPersistentQueueTest.m in Sources */,
 				DE6BF266181021A2004F80FA /* FXURLConnectionTests.m in Sources */,
 				DE204EFC181EA8C900FD9220 /* FXScoreTest.m in Sources */,
 				DE0367F418042D7400C16280 /* FXUtilsTests.m in Sources */,
+				DE14847A182AE5F7001DB4A1 /* CustomEntity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "FXCommon.h"
-#import "Flox+Internal.h"
+#import "Flox_Internal.h"
 
 #define USE_PRODUCTION_SERVER      1
 

@@ -107,6 +107,7 @@ static dispatch_queue_t ioQueue = NULL;
 - (void)save
 {
     [self saveIndex];
+    dispatch_sync(ioQueue, ^{});
 }
 
 - (NSInteger)count

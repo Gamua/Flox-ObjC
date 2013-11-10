@@ -11,6 +11,8 @@
 
 #import <Foundation/Foundation.h>
 
+typedef void (^FXNotificationBlock)(NSNotification *notification);
+
 /// The FXUtils class contains utility methods for different purposes.
 @interface FXUtils : NSObject
 
@@ -28,5 +30,10 @@
 
 /// Returns a date string formatted according to the `xs:DateTime` format.
 + (NSString *)stringFromDate:(NSDate *)date;
+
+/// Adds an observer to the default notification center. When the notification is dispatched,
+/// the block is executed and the observer is removed.
++ (void)observeNextNotification:(NSString *)name fromObject:(id)object
+                     usingBlock:(FXNotificationBlock)block;
 
 @end

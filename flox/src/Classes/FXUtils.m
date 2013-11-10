@@ -62,4 +62,16 @@
     return dateFormatter;
 }
 
++ (void)observeNextNotification:(NSString *)name fromObject:(id)object
+                     usingBlock:(FXNotificationBlock)block;
+{
+    __block id observer = [[NSNotificationCenter defaultCenter]
+                           addObserverForName:name object:object queue:nil
+                                   usingBlock:^(NSNotification *notification)
+    {
+        [[NSNotificationCenter defaultCenter] removeObserver:observer];
+        block(notification);
+    }];
+}
+
 @end

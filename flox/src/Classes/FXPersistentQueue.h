@@ -46,6 +46,7 @@ typedef void (^FXPersistentQueueLoadHeadBlock)(NSDictionary *head);
 - (void)removeHead;
 
 /// Saves the current state of the queue to the disk.
+/// This method blocks until saving is completed.
 - (void)save;
 
 // TODO: add 'filter'

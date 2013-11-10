@@ -8,6 +8,8 @@
 
 #import <XCTest/XCTest.h>
 #import "FXUtils.h"
+#import "FXEntity.h"
+#import "FXScore.h"
 
 @interface FXUtilsTests : XCTestCase
 
@@ -24,7 +26,7 @@
     }
 }
 
-- (void)stringFromDate
+- (void)testStringFromDate
 {
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
@@ -51,6 +53,5 @@
     
     XCTAssertEqualObjects(xmlDate, expectedXmlDate, @"date not formatted correctly");
 }
-
 
 @end

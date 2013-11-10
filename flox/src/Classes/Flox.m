@@ -12,7 +12,7 @@
 #import <UIKit/UIKit.h>
 
 #import "Flox.h"
-#import "Flox+Internal.h"
+#import "Flox_Internal.h"
 #import "FXRestService.h"
 #import "FXCommon.h"
 #import "FXUtils.h"
@@ -206,31 +206,6 @@ static void FXLog(NSString *format, ...)
 {
     FXLog(@"[Event] %@ - %@", name, [NSJSONSerialization stringWithJSONObject:properties]);
     [self.session logEvent:name properties:properties];
-}
-
-+ (void)logError:(NSError *)error
-{
-    [self logErrorWithName:error.domain message:error.description];
-}
-
-+ (void)logErrorWithName:(NSString *)name
-{
-    FXLog(@"[Error] %@", name);
-}
-
-+ (void)logErrorWithName:(NSString *)name message:(NSString *)format, ...
-{
-    va_list args;
-    va_start(args, format);
-    NSString *message = [[NSString alloc] initWithFormat:format arguments:args];
-    va_end(args);
-    
-    FXLog(@"[Error] %@: %@", name, message);
-}
-
-+ (void)logErrorWithException:(NSException *)exception
-{
-    FXLog(@"[Error] %@: %@", exception.name, exception.description);
 }
 
 #pragma mark - session management

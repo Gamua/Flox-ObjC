@@ -13,7 +13,7 @@
 #import "FXRestService.h"
 #import "FXURLConnection.h"
 #import "FXPersistentQueue.h"
-#import "Flox+Internal.h"
+#import "Flox_Internal.h"
 #import "NSJSONSerialization+String.h"
 #import "NSString+Flox.h"
 
@@ -141,15 +141,9 @@
 {
     if ([self processQueue])
     {
-        __block id observer = nil;
-        NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-
-        observer = [center addObserverForName:FXQueueProcessedNotification object:nil queue:nil
-                                   usingBlock:^(NSNotification *notification)
+        [FXUtils observeNextNotification:FXQueueProcessedNotification fromObject:self
+                              usingBlock:^(NSNotification *notification)
         {
-            NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-            [center removeObserver:observer];
-            
             NSDictionary *userInfo = notification.userInfo;
             
             BOOL success = [userInfo[@"success"] boolValue];

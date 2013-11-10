@@ -20,7 +20,7 @@ appledoc \
   --project-version "$version" \
   --explicit-crossref \
   --ignore ".m" \
-  --ignore "+Internal.h" \
+  --ignore "_Internal.h" \
   --ignore "FXRestService.h" \
   --ignore "FXURLConnection.h" \
   --ignore "FXPersistentQueue.h" \
