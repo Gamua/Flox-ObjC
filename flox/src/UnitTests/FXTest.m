@@ -24,9 +24,20 @@ NSString *const FXTestGameKey       = @"150a1bb6-b33d-4eb3-8848-23051f200359";
 
 + (void)startFlox
 {
+    return [self startFloxWithAnalytics:NO];
+}
+
++ (void)startFloxWithAnalytics
+{
+    return [self startFloxWithAnalytics:YES];
+}
+
++ (void)startFloxWithAnalytics:(BOOL)reportAnalytics
+{
     NSURL *baseURL = [NSURL URLWithString:FXTestBaseURL];
     
     [Flox setPrintLogs:NO];
+    [Flox setReportAnalytics:reportAnalytics];
     [Flox startWithGameID:FXTestGameID key:FXTestGameKey version:[Flox version]
                   baseURL:baseURL];
 }

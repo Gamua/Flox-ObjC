@@ -28,6 +28,10 @@ NSString *const FXHTTPMethodPut     = @"PUT";
 NSString *const FXHTTPMethodPost    = @"POST";
 NSString *const FXHTTPMethodDelete  = @"DELETE";
 
+NSString *const FXAuthTypeGuest  = @"guest";
+NSString *const FXAuthTypeKey    = @"key";
+NSString *const FXAuthTypeEmail  = @"email";
+
 NSString *const FXQueueProcessedNotification = @"FXQueueProcessed";
 
 BOOL FXHTTPStatusIsSuccess(NSInteger status)

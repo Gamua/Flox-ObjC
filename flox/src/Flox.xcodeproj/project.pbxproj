@@ -9,9 +9,12 @@
 /* Begin PBXBuildFile section */
 		DE0367F418042D7400C16280 /* FXUtilsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DE0367F318042D7400C16280 /* FXUtilsTests.m */; };
 		DE0367FB18044A9400C16280 /* FXRestService.m in Sources */ = {isa = PBXBuildFile; fileRef = DE0367FA18044A9400C16280 /* FXRestService.m */; };
+		DE08E4671832C67B00FE770F /* FXPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DE08E4661832C67B00FE770F /* FXPlayer.m */; };
 		DE148471182A9CD3001DB4A1 /* FXEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = DE148470182A9CD3001DB4A1 /* FXEntity.m */; };
 		DE148476182AE542001DB4A1 /* FXEntityTest.m in Sources */ = {isa = PBXBuildFile; fileRef = DE148475182AE542001DB4A1 /* FXEntityTest.m */; };
 		DE14847A182AE5F7001DB4A1 /* CustomEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = DE148479182AE5F7001DB4A1 /* CustomEntity.m */; };
+		DE1509881834FC430029F8B6 /* CustomPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DE1509871834FC430029F8B6 /* CustomPlayer.m */; };
+		DE15098A1834FC7A0029F8B6 /* FXPlayerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = DE1509891834FC7A0029F8B6 /* FXPlayerTest.m */; };
 		DE204EFA181E664700FD9220 /* FXPersistentQueueTest.m in Sources */ = {isa = PBXBuildFile; fileRef = DE204EF9181E664700FD9220 /* FXPersistentQueueTest.m */; };
 		DE204EFC181EA8C900FD9220 /* FXScoreTest.m in Sources */ = {isa = PBXBuildFile; fileRef = DE204EFB181EA8C900FD9220 /* FXScoreTest.m */; };
 		DE29B40C181E460000242381 /* FXUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = DE29B40B181E460000242381 /* FXUtils.m */; };
@@ -34,6 +37,7 @@
 		DEB702481811192B000D295E /* FXScore.m in Sources */ = {isa = PBXBuildFile; fileRef = DEB702471811192B000D295E /* FXScore.m */; };
 		DEB7024E18111FDC000D295E /* FXTest.m in Sources */ = {isa = PBXBuildFile; fileRef = DEB7024D18111FDC000D295E /* FXTest.m */; };
 		DEED94BD180EE36F009C30A0 /* FXCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = DEED94BC180EE36F009C30A0 /* FXCommon.m */; };
+		DEF16CAD18341EEC00199081 /* FXAuthentication.m in Sources */ = {isa = PBXBuildFile; fileRef = DEF16CAC18341EEC00199081 /* FXAuthentication.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,11 +68,16 @@
 		DE0367F61804390A00C16280 /* Flox_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flox_Internal.h; sourceTree = "<group>"; };
 		DE0367F918044A9400C16280 /* FXRestService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXRestService.h; sourceTree = "<group>"; };
 		DE0367FA18044A9400C16280 /* FXRestService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXRestService.m; sourceTree = "<group>"; };
+		DE08E4651832C67B00FE770F /* FXPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXPlayer.h; sourceTree = "<group>"; };
+		DE08E4661832C67B00FE770F /* FXPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXPlayer.m; sourceTree = "<group>"; };
 		DE14846F182A9CD3001DB4A1 /* FXEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXEntity.h; sourceTree = "<group>"; };
 		DE148470182A9CD3001DB4A1 /* FXEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXEntity.m; sourceTree = "<group>"; };
 		DE148475182AE542001DB4A1 /* FXEntityTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXEntityTest.m; sourceTree = "<group>"; };
 		DE148478182AE5F7001DB4A1 /* CustomEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomEntity.h; sourceTree = "<group>"; };
 		DE148479182AE5F7001DB4A1 /* CustomEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomEntity.m; sourceTree = "<group>"; };
+		DE1509861834FC430029F8B6 /* CustomPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomPlayer.h; sourceTree = "<group>"; };
+		DE1509871834FC430029F8B6 /* CustomPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomPlayer.m; sourceTree = "<group>"; };
+		DE1509891834FC7A0029F8B6 /* FXPlayerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXPlayerTest.m; sourceTree = "<group>"; };
 		DE204EF9181E664700FD9220 /* FXPersistentQueueTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXPersistentQueueTest.m; sourceTree = "<group>"; };
 		DE204EFB181EA8C900FD9220 /* FXScoreTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXScoreTest.m; sourceTree = "<group>"; };
 		DE29B40A181E460000242381 /* FXUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXUtils.h; sourceTree = "<group>"; };
@@ -104,6 +113,8 @@
 		DEB7024D18111FDC000D295E /* FXTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXTest.m; sourceTree = "<group>"; };
 		DEED94BB180EE36F009C30A0 /* FXCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXCommon.h; sourceTree = "<group>"; };
 		DEED94BC180EE36F009C30A0 /* FXCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXCommon.m; sourceTree = "<group>"; };
+		DEF16CAB18341EEC00199081 /* FXAuthentication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXAuthentication.h; sourceTree = "<group>"; };
+		DEF16CAC18341EEC00199081 /* FXAuthentication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXAuthentication.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +168,8 @@
 				DE90F65B1822954700632993 /* FXCapabilities.m */,
 				DE90F65D1822A1CE00632993 /* FXInstallationData.h */,
 				DE90F65E1822A1CE00632993 /* FXInstallationData.m */,
+				DEF16CAB18341EEC00199081 /* FXAuthentication.h */,
+				DEF16CAC18341EEC00199081 /* FXAuthentication.m */,
 			);
 			name = Internal;
 			sourceTree = "<group>";
@@ -166,6 +179,8 @@
 			children = (
 				DE148478182AE5F7001DB4A1 /* CustomEntity.h */,
 				DE148479182AE5F7001DB4A1 /* CustomEntity.m */,
+				DE1509861834FC430029F8B6 /* CustomPlayer.h */,
+				DE1509871834FC430029F8B6 /* CustomPlayer.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -214,6 +229,8 @@
 				DE29B40B181E460000242381 /* FXUtils.m */,
 				DE14846F182A9CD3001DB4A1 /* FXEntity.h */,
 				DE148470182A9CD3001DB4A1 /* FXEntity.m */,
+				DE08E4651832C67B00FE770F /* FXPlayer.h */,
+				DE08E4661832C67B00FE770F /* FXPlayer.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -230,6 +247,7 @@
 				DE204EF9181E664700FD9220 /* FXPersistentQueueTest.m */,
 				DE204EFB181EA8C900FD9220 /* FXScoreTest.m */,
 				DE148475182AE542001DB4A1 /* FXEntityTest.m */,
+				DE1509891834FC7A0029F8B6 /* FXPlayerTest.m */,
 			);
 			path = UnitTests;
 			sourceTree = "<group>";
@@ -334,6 +352,8 @@
 				DE90F65918228FD000632993 /* FXGameSession.m in Sources */,
 				DE90F65C1822954700632993 /* FXCapabilities.m in Sources */,
 				DEA3F96A181AA08400516287 /* FXPersistentQueue.m in Sources */,
+				DE08E4671832C67B00FE770F /* FXPlayer.m in Sources */,
+				DEF16CAD18341EEC00199081 /* FXAuthentication.m in Sources */,
 				DE6BF26918102E9F004F80FA /* NSJSONSerialization+String.m in Sources */,
 				DE90F65F1822A1CE00632993 /* FXInstallationData.m in Sources */,
 				DE0367FB18044A9400C16280 /* FXRestService.m in Sources */,
@@ -349,8 +369,10 @@
 				DE204EFA181E664700FD9220 /* FXPersistentQueueTest.m in Sources */,
 				DE6BF266181021A2004F80FA /* FXURLConnectionTests.m in Sources */,
 				DE204EFC181EA8C900FD9220 /* FXScoreTest.m in Sources */,
+				DE15098A1834FC7A0029F8B6 /* FXPlayerTest.m in Sources */,
 				DE0367F418042D7400C16280 /* FXUtilsTests.m in Sources */,
 				DE14847A182AE5F7001DB4A1 /* CustomEntity.m in Sources */,
+				DE1509881834FC430029F8B6 /* CustomPlayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

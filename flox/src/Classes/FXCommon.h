@@ -34,6 +34,10 @@ FX_EXTERN NSString *const FXAccessNone;
 FX_EXTERN NSString *const FXAccessRead;
 FX_EXTERN NSString *const FXAccessReadWrite;
 
+FX_EXTERN NSString *const FXAuthTypeGuest;
+FX_EXTERN NSString *const FXAuthTypeKey;
+FX_EXTERN NSString *const FXAuthTypeEmail;
+
 FX_EXTERN NSString *const FXQueueProcessedNotification;
 
 /// FXHTTPStatus describes the HTTP status codes that are used by the Flox server.

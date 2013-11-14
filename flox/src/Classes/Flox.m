@@ -29,6 +29,7 @@ static FXInstallationData *installationData;
 static BOOL printLogs = YES;
 static BOOL reportAnalytics = YES;
 static NSDate *deactivatedAt = nil;
+static Class playerClass = nil;
 
 // --- C functions ---------------------------------------------------------------------------------
 
@@ -71,6 +72,10 @@ static void FXLog(NSString *format, ...)
 {
     if ([self isStarted])
     {
+        [self.session pause];
+        [self observeApplicationNotifications:NO];
+        [self saveLocalData];
+        
         gameID = gameKey = gameVersion = nil;
         restService = nil;
     }
@@ -273,13 +278,6 @@ static void FXLog(NSString *format, ...)
     [restService processQueue];
 }
 
-+ (void)checkStarted
-{
-    if (![self isStarted])
-        [NSException raise:FXExceptionInvalidOperation
-                    format:@"Call [Flox start...]' before using any other method."];
-}
-
 + (BOOL)isStarted
 {
     return restService != nil;
@@ -316,6 +314,26 @@ static void FXLog(NSString *format, ...)
     return reportAnalytics;
 }
 
++ (void)setPlayerClass:(Class)aClass
+{
+    if ([self isStarted])
+        [NSException raise:FXExceptionInvalidOperation
+                    format:@"The Player class needs to be set BEFORE starting Flox"];
+    else if (!aClass)
+        [NSException raise:FXExceptionInvalidOperation
+                    format:@"The Player class must not be 'nil'"];
+    else if (![aClass isSubclassOfClass:[FXPlayer class]])
+        [NSException raise:FXExceptionInvalidOperation
+                    format:@"The Player class must extend 'FXPlayer'"];
+    
+    playerClass = aClass;
+}
+
++ (Class)playerClass
+{
+    return playerClass;
+}
+
 + (NSString *)pathForInstallationData
 {
     // TODO: check if gameID is valid string for file ...
@@ -345,6 +363,9 @@ static void FXLog(NSString *format, ...)
     if ([self isStarted])
         [NSException raise:FXExceptionInvalidOperation format:@"Flox is already initialized"];
     
+    if (!playerClass)
+        playerClass = [FXPlayer class];
+    
     gameID      = [aGameID copy];
     gameKey     = [aGameKey copy];
     gameVersion = [aGameVersion copy];
@@ -353,6 +374,9 @@ static void FXLog(NSString *format, ...)
     
     if (!installationData)
         installationData = [[FXInstallationData alloc] init];
+    
+    if (!self.currentPlayer)
+        [FXPlayer loginGuest];
     
     [self observeApplicationNotifications:YES];
     [self startNewGameSession];
@@ -363,6 +387,33 @@ static void FXLog(NSString *format, ...)
 {
     [self checkStarted];
     return restService;
+}
+
++ (void)checkStarted
+{
+    if (![self isStarted])
+        [NSException raise:FXExceptionInvalidOperation
+                    format:@"Call [Flox start...]' before using any other method."];
+}
+
++ (FXPlayer *)currentPlayer
+{
+    return installationData.currentPlayer;
+}
+
++ (void)setCurrentPlayer:(FXPlayer *)player
+{
+    installationData.currentPlayer = player;
+}
+
++ (FXAuthentication *)authentication
+{
+    return installationData.authentication;
+}
+
++ (void)setAuthentication:(FXAuthentication *)authentication
+{
+    installationData.authentication = authentication;
 }
 
 @end

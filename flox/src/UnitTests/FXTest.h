@@ -45,6 +45,7 @@ FX_EXTERN NSString *const FXTestGameKey;
 
 @interface FXTest : NSObject
 
++ (void)startFloxWithAnalytics;
 + (void)startFlox;
 + (void)stopFlox;
 

@@ -10,7 +10,9 @@
 //
 
 #import "Flox.h"
+#import "FXAuthentication.h"
 #import "FXRestService.h"
+#import "FXPlayer.h"
 
 @interface Flox (Internal)
 
@@ -20,5 +22,16 @@
 
 /// Returns the rest service class that is used for all client-server communication.
 + (FXRestService *)service;
+
+/// The current local player, stored persistently.
++ (FXPlayer *)currentPlayer;
++ (void)setCurrentPlayer:(FXPlayer *)player;
+
+/// The current authentication object, stored persistently.
++ (FXAuthentication *)authentication;
++ (void)setAuthentication:(FXAuthentication *)authentication;
+
+/// Indicates if one of the "start" methods has already been called on Flox.
++ (void)checkStarted;
 
 @end

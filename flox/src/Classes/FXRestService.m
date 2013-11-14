@@ -40,7 +40,8 @@
 }
 
 - (void)requestWithMethod:(NSString *)method path:(NSString *)path data:(NSDictionary *)data
-           authentication:(id)authentication onComplete:(FXRequestCompleteBlock)completeBlock
+           authentication:(FXAuthentication *)authentication
+               onComplete:(FXRequestCompleteBlock)completeBlock
 {
     if ([method isEqualToString:FXHTTPMethodGet])
     {
@@ -48,15 +49,18 @@
         data = nil;
     }
     
+    if (!authentication)
+        authentication = Flox.authentication;
+    
     NSDictionary *floxHeader = @{
       @"sdk": @{
         @"type": @"objc",
         @"version": @"0.1" }, // TODO: add version
       @"player": @{
-        @"id": @"unit-test-player-id", // TODO: add real player data
-        @"authType": @"guest",
-        @"authId": @"unit-test-auth-id",
-        @"authToken": @"unit-test-auth-token"
+        @"id":        authentication.playerID,
+        @"authType":  authentication.type,
+        @"authId":    authentication.id,
+        @"authToken": authentication.token
       },
       @"gameKey": _gameKey,
       @"bodyCompression": @"none", // TODO: add compression
@@ -139,6 +143,9 @@
 - (void)requestWithMethod:(NSString *)method path:(NSString *)path data:(NSDictionary *)data
                onComplete:(FXRequestCompleteBlock)completeBlock
 {
+    // might change before we're in the notification observer!
+    FXAuthentication *auth = Flox.authentication;
+    
     if ([self processQueue])
     {
         [FXUtils observeNextNotification:FXQueueProcessedNotification fromObject:self
@@ -151,7 +158,7 @@
             NSError *error = userInfo[@"error"];
             
             if (success)
-                [self requestWithMethod:method path:path data:data authentication:nil
+                [self requestWithMethod:method path:path data:data authentication:auth
                              onComplete:completeBlock];
             else
             {
@@ -162,7 +169,7 @@
     }
     else
     {
-        [self requestWithMethod:method path:path data:data authentication:nil
+        [self requestWithMethod:method path:path data:data authentication:auth
                      onComplete:completeBlock];
     }
 }
@@ -181,7 +188,8 @@
 
 - (BOOL)processQueue
 {
-    if (_processingQueue) return YES;
+    if (_processingQueue)
+        return YES;
     
     if (_queue.count)
     {
@@ -230,7 +238,10 @@
              else
              {
                  _processingQueue = NO;
-                 [self postQueueProcessedNotificationWithHttpStatus:200 error:nil];
+                 
+                 // file could not be loaded -> we continue with the next element
+                 [_queue removeHead];
+                 [self processQueue];
              }
          }];
     }

@@ -166,4 +166,13 @@ typedef void (^FXScoresLoadedBlock)(NSArray *scores, NSError *error);
 /// Indicates if analytics reports should be sent to the server.
 + (BOOL)reportAnalytics;
 
+/// The class that is used for Flox player entities; needs to be a subclass of 'FXPlayer'.
+/// If you want to store additional information with your player entity, create a subclass
+/// of 'FXPlayer' and add the properties you need; then inform Flox about it by assigning
+/// the class here. Beware: this method has to be called BEFORE initializing Flox. */
++ (void)setPlayerClass:(Class)playerClass;
+
+/// The class that is used for Flox player entities; a subclass of 'FXPlayer'.
++ (Class)playerClass;
+
 @end

@@ -11,6 +11,8 @@
 
 #import <Foundation/Foundation.h>
 #import "FXGameSession.h"
+#import "FXPlayer.h"
+#import "FXAuthentication.h"
 
 /// The FXInstallationData class stores information related to the lifetime of an application
 /// installation.
@@ -22,5 +24,11 @@
 
 /// The current game session / analytics object.
 @property (nonatomic, strong) FXGameSession *gameSession;
+
+/// The current local player.
+@property (nonatomic, strong) FXPlayer *currentPlayer;
+
+/// The current authentication object.
+@property (nonatomic, strong) FXAuthentication *authentication;
 
 @end
