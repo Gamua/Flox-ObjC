@@ -27,6 +27,7 @@ appledoc \
   --ignore "FXGameSession.h" \
   --ignore "FXCapabilities.h" \
   --ignore "FXInstallationData.h" \
+  --ignore "FXAuthentication.h" \
   --keep-undocumented-objects \
   --keep-undocumented-members \
   --keep-intermediate-files \
