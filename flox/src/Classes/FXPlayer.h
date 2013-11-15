@@ -38,6 +38,10 @@ typedef void (^FXPlayerLoginCompleteBlock)(id player, NSInteger httpStatus, NSEr
 ------------------------------------------------------------------------------------------------- */
 @interface FXPlayer : FXEntity
 
+/// --------------------
+/// @name Authentication
+/// --------------------
+
 /// Log in a player with the given authentication information.
 ///
 /// Flox requires that there's always a player logged in. Thus, there is no 'logout'
@@ -75,6 +79,10 @@ typedef void (^FXPlayerLoginCompleteBlock)(id player, NSInteger httpStatus, NSEr
 /// Logs the current player out and creates a new guest player.
 /// `[FXPlayer current]` will immediately reference that player.
 + (void)loginGuest;
+
+/// -------------
+/// @name Methods
+/// -------------
 
 /// The current local player.
 + (instancetype)current;

@@ -14,9 +14,17 @@
 /// This class stores information about how the current player was authenticated.
 @interface FXAuthentication : NSObject <NSCoding>
 
+/// --------------------
+/// @name Initialization
+/// --------------------
+
 /// Create an Authentication instance with the given parameters.
 - (instancetype)initWithPlayerID:(NSString *)playerID type:(NSString *)authType
                               id:(NSString *)authID token:(NSString *)authToken;
+
+/// ----------------
+/// @name Properties
+/// ----------------
 
 /// The player ID of the authenticated player.
 @property (nonatomic, readonly) NSString *playerID;
