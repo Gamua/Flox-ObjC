@@ -259,7 +259,7 @@ static NSString *const NSDateType = @"@\"NSDate\"";
     if ((self = [super init]))
     {
         _id = [entityID copy];
-        _ownerId = nil; // TODO: Player.current.id
+        _ownerId = [FXPlayer current].id;
         _createdAt = [NSDate date];
         _updatedAt = [NSDate date];
         _publicAccess = FXAccessNone;
@@ -270,15 +270,18 @@ static NSString *const NSDateType = @"@\"NSDate\"";
             
             for(id key in dictionary)
             {
-                NSString *name = [@"_" stringByAppendingString:key];
-                NSString *type = ivars[name];
                 id value = dictionary[key];
-                
-                // dates are encoded in our xs:DateTime format
-                if ([type isEqualToString:NSDateType])
-                    value = [FXUtils dateFromString:value];
-                
-                [self setValue:value forKey:name];
+
+                if (value != [NSNull null])
+                {
+                    NSString *name = [@"_" stringByAppendingString:key];
+                    NSString *type = ivars[name];
+
+                    if ([type isEqualToString:NSDateType]) // dates are encoded as xs:DateTime
+                        value = [FXUtils dateFromString:value];
+                    
+                    [self setValue:value forKey:name];
+                }
             }
         }
     }
@@ -301,14 +304,13 @@ static NSString *const NSDateType = @"@\"NSDate\"";
         if (name.length > 1 && [name characterAtIndex:0] == '_' && [name characterAtIndex:1] != '_')
         {
             id value = [self valueForKey:name];
-            if (value)
-            {
-                // dates are encoded in our xs:DateTime format
-                if ([ivars[name] isEqualToString:NSDateType])
-                    value = [FXUtils stringFromDate:value];
-                
-                dictionary[[name substringFromIndex:1]] = value;
-            }
+
+            if (!value) // dictionaries do not support plain 'nil'
+                value = [NSNull null];
+            else if ([ivars[name] isEqualToString:NSDateType]) // dates are encoded as xs:DateTime
+                value = [FXUtils stringFromDate:value];
+            
+            dictionary[[name substringFromIndex:1]] = value;
         }
     }
     

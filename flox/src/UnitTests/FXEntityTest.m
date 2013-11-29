@@ -102,7 +102,6 @@
         {
             FX_ABORT_SYNC_ON_ERROR(error, @"could not load entity");
             
-            XCTAssertNil(error, @"could not load entity: %@", error);
             XCTAssertEqualObjects([origEntity id], [entity id], @"loaded wrong entity");
             XCTAssertEqual([origEntity class], [entity class], @"loaded wrong type of entity");
             
