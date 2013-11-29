@@ -13,7 +13,7 @@
 
 typedef void (^FXPersistentStoreLoadBlock)(id object);
 
-/// A file store that uses an NSKeyedArchiver to persist its contents.
+/// A data store that persists its contents on the disk.
 @interface FXPersistentStore : NSObject
 
 /// --------------------

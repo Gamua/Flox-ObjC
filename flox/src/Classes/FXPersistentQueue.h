@@ -13,7 +13,7 @@
 
 typedef void (^FXPersistentQueueLoadHeadBlock)(id head);
 
-/// A queue that uses plist files to persist its contents.
+/// A queue that persists its contents on the disk.
 @interface FXPersistentQueue : NSObject
 
 /// --------------------
