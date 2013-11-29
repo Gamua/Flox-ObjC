@@ -90,13 +90,22 @@ typedef void (^FXScoresLoadedBlock)(NSArray *scores, NSError *error);
     toLeaderboard:(NSString *)leaderboardID;
 
 /// Loads the scores (instances of `FXScore`) of a certain leaderboard from the server.
-/// At the moment, you get a maximum of 200 scores per leaderboard and time scope.
-/// Each player will be in the list only once.
+/// You will get the top scores of the top players in the specified time scope (at the moment,
+/// a maximum of 200 scores). Each player will be in the list only once.
 ///
 /// Note that when the server cannot be reached (e.g. because the player is offline - the 'error'
 /// parameter will tell you more), the 'scores' parameter will contain the scores that Flox
 /// cached from the last request (if available).
 + (void)loadScoresFromLeaderboard:(NSString *)leaderboardID timeScope:(FXTimeScope)timeScope
+                       onComplete:(FXScoresLoadedBlock)block;
+
+/// Loads the scores (instances of `FXScore`) of a certain leaderboard from the server.
+/// You will get the top scores all the players you specified, sorted by their values.
+///
+/// Note that when the server cannot be reached (e.g. because the player is offline - the 'error'
+/// parameter will tell you more), the 'scores' parameter will contain the scores that Flox
+/// cached from the last request (if available).
++ (void)loadScoresFromLeaderboard:(NSString *)leaderboardID playerIDs:(NSArray *)playerIDs
                        onComplete:(FXScoresLoadedBlock)block;
 
 /// -------------

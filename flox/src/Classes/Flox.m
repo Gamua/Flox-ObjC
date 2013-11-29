@@ -112,6 +112,21 @@ static void FXLog(NSString *format, ...)
     }];
 }
 
++ (void)loadScoresFromLeaderboard:(NSString *)leaderboardID playerIDs:(NSArray *)playerIDs
+                       onComplete:(FXScoresLoadedBlock)block
+{
+    [self checkStarted];
+    
+    NSString *path = [@"leaderboards/" stringByAppendingString:leaderboardID];
+    NSDictionary *data = @{ @"p": playerIDs };
+    
+    [restService requestWithMethod:FXHTTPMethodGet path:path data:data
+                        onComplete:^(id body, NSInteger httpStatus, NSError *error)
+     {
+         block([self createScoreArray:body], error);
+     }];
+}
+
 + (NSArray *)createScoreArray:(NSArray *)rawScores
 {
     if (!rawScores) return nil;

@@ -71,4 +71,33 @@ static NSString *const FXTestLeaderboardID = @"default";
     FX_WAIT_FOR_SYNC();
 }
 
+- (void)testPlayerScores
+{
+    FX_START_SYNC();
+    
+    [FXPlayer loginGuest];
+    FXPlayer *player1 = [FXPlayer current];
+    [Flox postScore:100 ofPlayer:@"Thelma" toLeaderboard:FXTestLeaderboardID];
+    
+    [FXPlayer loginGuest];
+    FXPlayer *player2 = [FXPlayer current];
+    [Flox postScore:101 ofPlayer:@"Louise" toLeaderboard:FXTestLeaderboardID];
+    
+    NSArray *playerIDs = @[ player1.id, player2.id ];
+    
+    [Flox loadScoresFromLeaderboard:FXTestLeaderboardID playerIDs:playerIDs
+                         onComplete:^(NSArray *scores, NSError *error)
+    {
+        FX_ABORT_SYNC_ON_ERROR(error, @"could not load scores");
+        
+        XCTAssertEqual(2, (int)scores.count, @"returned wrong number of scores");
+        XCTAssertEqualObjects([scores[0] playerID], player2.id, @"wrong top score");
+        XCTAssertEqualObjects([scores[1] playerID], player1.id, @"wrong 2nd score");
+        
+        FX_END_SYNC();
+    }];
+    
+    FX_WAIT_FOR_SYNC();
+}
+
 @end
