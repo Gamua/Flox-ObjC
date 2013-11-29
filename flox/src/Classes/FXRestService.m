@@ -176,13 +176,16 @@
 
 - (void)requestQueuedWithMethod:(NSString *)method path:(NSString *)path data:(NSDictionary *)data
 {
+    FXAuthentication *auth = [Flox authentication];
+    
     if ([method isEqualToString:FXHTTPMethodPut])
     {
         // TODO: save data to cache
         // TODO: filter redundant queue contents
     }
     
-    [_queue enqueueObject:@{ @"method": method, @"path": path, @"data": data }];
+    [_queue enqueueObject:@{ @"method": method, @"path": path,
+                             @"data": data, @"authentication": auth }];
     [self processQueue];
 }
 
@@ -199,11 +202,12 @@
          {
              if (head)
              {
-                 NSString *method   = head[@"method"];
-                 NSString *path     = head[@"path"];
-                 NSDictionary *data = head[@"data"];
+                 NSString *method       = head[@"method"];
+                 NSString *path         = head[@"path"];
+                 NSDictionary *data     = head[@"data"];
+                 FXAuthentication *auth = head[@"authentication"];
                  
-                 [self requestWithMethod:method path:path data:data authentication:nil
+                 [self requestWithMethod:method path:path data:data authentication:auth
                               onComplete:^(NSObject *body, NSInteger httpStatus, NSError *error)
                   {
                       _processingQueue = NO;
