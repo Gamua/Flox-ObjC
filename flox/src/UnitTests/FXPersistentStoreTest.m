@@ -113,4 +113,21 @@ NSString *const FXStoreName = @"store-name";
     FX_END_SYNC();
 }
 
+- (void)testMetaData
+{
+    FXPersistentStore *store = [[FXPersistentStore alloc] initWithName:FXStoreName];
+    
+    NSDictionary *object   = @{ @"string": @"hugo", @"number": @0 };
+    NSDictionary *metaData = @{ @"eTag": @"1234" };
+    
+    [store setObject:object forKey:@"object" withMetaData:metaData];
+    
+    XCTAssertEqualObjects([store metaDataForKey:@"object"], metaData, @"retrieved wrong metaData");
+    
+    [store save];
+    store = [[FXPersistentStore alloc] initWithName:FXStoreName];
+    
+    XCTAssertEqualObjects([store metaDataForKey:@"object"], metaData, @"retrieved wrong metaData");
+}
+
 @end
