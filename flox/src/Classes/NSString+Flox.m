@@ -31,15 +31,25 @@
     if (!parameters || [parameters count] == 0)
         return self;
     
-    __block int count = 0;
+    NSMutableArray *elements = [[NSMutableArray alloc] init];
     NSMutableString *uriString = [NSMutableString stringWithFormat:@"%@?", self];
     
     [parameters enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop)
      {
-         if (count++ > 0) [uriString appendString:@"&"];
-         [uriString appendFormat:@"%@=%@", [key urlEncode], [obj urlEncode]];
+         if ([obj isKindOfClass:[NSArray class]])
+         {
+             for (id object in obj)
+                 [elements addObject:[NSString stringWithFormat:@"%@=%@",
+                     [[key description] urlEncode], [[object description] urlEncode]]];
+         }
+         else
+         {
+             [elements addObject:[NSString stringWithFormat:@"%@=%@",
+                 [[key description] urlEncode], [[obj description] urlEncode]]];
+         }
      }];
     
+    [uriString appendString:[elements componentsJoinedByString:@"&"]];
     return uriString;
 }
 
