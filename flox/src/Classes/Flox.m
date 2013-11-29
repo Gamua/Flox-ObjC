@@ -88,13 +88,13 @@ static void FXLog(NSString *format, ...)
 {
     [self checkStarted];
     
+    NSString *path = [@"leaderboards/" stringByAppendingString:leaderboardID];
     NSDictionary *data = @{
-        @"leaderboardId": leaderboardID,
         @"playerName": playerName,
         @"value": @(score)
     };
     
-    [restService requestQueuedWithMethod:FXHTTPMethodPost path:@".score" data:data];
+    [restService requestQueuedWithMethod:FXHTTPMethodPost path:path data:data];
 }
 
 + (void)loadScoresFromLeaderboard:(NSString *)leaderboardID timeScope:(FXTimeScope)timeScope
@@ -102,16 +102,10 @@ static void FXLog(NSString *format, ...)
 {
     [self checkStarted];
     
-    NSDictionary *query = @{
-        @"leaderboardId": leaderboardID,
-        @"timeScope": FXTimeScopeToString(timeScope),
-        @"limit": @(50),
-        @"offset": @(0)
-    };
+    NSString *path = [@"leaderboards/" stringByAppendingString:leaderboardID];
+    NSDictionary *data = @{ @"t": FXTimeScopeToString(timeScope) };
     
-    NSDictionary *data = @{ @"q": [NSJSONSerialization stringWithJSONObject:query] };
-    
-    [restService requestWithMethod:FXHTTPMethodGet path:@".score" data:data
+    [restService requestWithMethod:FXHTTPMethodGet path:path data:data
                         onComplete:^(id body, NSInteger httpStatus, NSError *error)
     {
         block([self createScoreArray:body], error);
@@ -128,7 +122,7 @@ static void FXLog(NSString *format, ...)
         {
             NSString *playerID   = rawScore[@"playerId"];
             NSString *playerName = rawScore[@"playerName"];
-            NSString *country    = rawScore[@"countryCode"];
+            NSString *country    = rawScore[@"country"];
             NSDate *date         = [FXUtils dateFromString:rawScore[@"createdAt"]];
             NSInteger value      = [rawScore[@"value"] integerValue];
             
