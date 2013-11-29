@@ -38,6 +38,8 @@
 		DEB7024E18111FDC000D295E /* FXTest.m in Sources */ = {isa = PBXBuildFile; fileRef = DEB7024D18111FDC000D295E /* FXTest.m */; };
 		DEED94BD180EE36F009C30A0 /* FXCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = DEED94BC180EE36F009C30A0 /* FXCommon.m */; };
 		DEF16CAD18341EEC00199081 /* FXAuthentication.m in Sources */ = {isa = PBXBuildFile; fileRef = DEF16CAC18341EEC00199081 /* FXAuthentication.m */; };
+		DEFF18C11848B49E00C77D46 /* FXPersistentStore.m in Sources */ = {isa = PBXBuildFile; fileRef = DEFF18C01848B49E00C77D46 /* FXPersistentStore.m */; };
+		DEFF18C31848C29000C77D46 /* FXPersistentStoreTest.m in Sources */ = {isa = PBXBuildFile; fileRef = DEFF18C21848C29000C77D46 /* FXPersistentStoreTest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,6 +117,9 @@
 		DEED94BC180EE36F009C30A0 /* FXCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXCommon.m; sourceTree = "<group>"; };
 		DEF16CAB18341EEC00199081 /* FXAuthentication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXAuthentication.h; sourceTree = "<group>"; };
 		DEF16CAC18341EEC00199081 /* FXAuthentication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXAuthentication.m; sourceTree = "<group>"; };
+		DEFF18BF1848B49E00C77D46 /* FXPersistentStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXPersistentStore.h; sourceTree = "<group>"; };
+		DEFF18C01848B49E00C77D46 /* FXPersistentStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXPersistentStore.m; sourceTree = "<group>"; };
+		DEFF18C21848C29000C77D46 /* FXPersistentStoreTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXPersistentStoreTest.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +167,8 @@
 				DE6BF26318101EFB004F80FA /* FXURLConnection.m */,
 				DEA3F968181AA08400516287 /* FXPersistentQueue.h */,
 				DEA3F969181AA08400516287 /* FXPersistentQueue.m */,
+				DEFF18BF1848B49E00C77D46 /* FXPersistentStore.h */,
+				DEFF18C01848B49E00C77D46 /* FXPersistentStore.m */,
 				DE90F65718228FD000632993 /* FXGameSession.h */,
 				DE90F65818228FD000632993 /* FXGameSession.m */,
 				DE90F65A1822954700632993 /* FXCapabilities.h */,
@@ -245,6 +252,7 @@
 				DE0367F318042D7400C16280 /* FXUtilsTests.m */,
 				DE6BF265181021A2004F80FA /* FXURLConnectionTests.m */,
 				DE204EF9181E664700FD9220 /* FXPersistentQueueTest.m */,
+				DEFF18C21848C29000C77D46 /* FXPersistentStoreTest.m */,
 				DE204EFB181EA8C900FD9220 /* FXScoreTest.m */,
 				DE148475182AE542001DB4A1 /* FXEntityTest.m */,
 				DE1509891834FC7A0029F8B6 /* FXPlayerTest.m */,
@@ -351,6 +359,7 @@
 				DE795C2517FC655900FECA2E /* Flox.m in Sources */,
 				DE90F65918228FD000632993 /* FXGameSession.m in Sources */,
 				DE90F65C1822954700632993 /* FXCapabilities.m in Sources */,
+				DEFF18C11848B49E00C77D46 /* FXPersistentStore.m in Sources */,
 				DEA3F96A181AA08400516287 /* FXPersistentQueue.m in Sources */,
 				DE08E4671832C67B00FE770F /* FXPlayer.m in Sources */,
 				DEF16CAD18341EEC00199081 /* FXAuthentication.m in Sources */,
@@ -370,6 +379,7 @@
 				DE6BF266181021A2004F80FA /* FXURLConnectionTests.m in Sources */,
 				DE204EFC181EA8C900FD9220 /* FXScoreTest.m in Sources */,
 				DE15098A1834FC7A0029F8B6 /* FXPlayerTest.m in Sources */,
+				DEFF18C31848C29000C77D46 /* FXPersistentStoreTest.m in Sources */,
 				DE0367F418042D7400C16280 /* FXUtilsTests.m in Sources */,
 				DE14847A182AE5F7001DB4A1 /* CustomEntity.m in Sources */,
 				DE1509881834FC430029F8B6 /* CustomPlayer.m in Sources */,
