@@ -48,7 +48,7 @@ static dispatch_queue_t ioQueue = NULL;
     return [self initWithName:@"default"];
 }
 
-- (void)enqueueObject:(NSDictionary *)object withMetaData:(NSDictionary *)metaData
+- (void)enqueueObject:(id)object withMetaData:(NSDictionary *)metaData
 {
     NSString *name = [FXUtils randomUID];
     NSDictionary *indexData = [[NSDictionary alloc] initWithObjectsAndKeys:
@@ -58,11 +58,11 @@ static dispatch_queue_t ioQueue = NULL;
     dispatch_async(ioQueue, ^
     {
         NSString *path = [self pathForResource:name];
-        [object writeToFile:path atomically:YES];
+        [NSKeyedArchiver archiveRootObject:object toFile:path];
     });
 }
 
-- (void)enqueueObject:(NSDictionary *)object
+- (void)enqueueObject:(id)object
 {
     [self enqueueObject:object withMetaData:nil];
 }
@@ -75,7 +75,7 @@ static dispatch_queue_t ioQueue = NULL;
     dispatch_async(ioQueue, ^
     {
         NSString *path = [self pathForResource:name];
-        NSDictionary *head = [[NSDictionary alloc] initWithContentsOfFile:path];
+        id head = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
         
         // file may be corrupted -- delete it
         if (!head) [[NSFileManager defaultManager] removeItemAtPath:path error:NULL];

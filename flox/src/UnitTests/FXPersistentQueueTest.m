@@ -41,18 +41,18 @@ NSString *const FXQueueName = @"queue-name";
     
     XCTAssertEqual(3, queue.count, @"wrong queue count");
     
-    [queue loadHead:^(NSDictionary *head)
+    [queue loadHead:^(id head)
      {
          XCTAssertEqualObjects(head, object0, @"wrong head of queue");
      }];
     
-    [queue loadHead:^(NSDictionary *head)
+    [queue loadHead:^(id head)
      {
          XCTAssertEqualObjects(head, object0, @"wrong head of queue");
      }];
     
     [queue removeHead];
-    [queue loadHead:^(NSDictionary *head)
+    [queue loadHead:^(id head)
      {
          XCTAssertEqualObjects(head, object1, @"wrong head of queue");
      }];
@@ -60,7 +60,7 @@ NSString *const FXQueueName = @"queue-name";
     XCTAssertEqual(2, queue.count, @"wrong queue count");
     
     [queue enqueueObject:object0];
-    [queue loadHead:^(NSDictionary *head)
+    [queue loadHead:^(id head)
      {
          XCTAssertEqualObjects(head, object1, @"wrong head of queue");
      }];
@@ -68,19 +68,19 @@ NSString *const FXQueueName = @"queue-name";
     XCTAssertEqual(3, queue.count, @"wrong queue count");
     
     [queue removeHead];
-    [queue loadHead:^(NSDictionary *head)
+    [queue loadHead:^(id head)
      {
          XCTAssertEqualObjects(head, object2, @"wrong head of queue");
      }];
 
     [queue removeHead];
-    [queue loadHead:^(NSDictionary *head)
+    [queue loadHead:^(id head)
      {
          XCTAssertEqualObjects(head, object0, @"wrong head of queue");
      }];
 
     [queue removeHead];
-    [queue loadHead:^(NSDictionary *head)
+    [queue loadHead:^(id head)
      {
          XCTAssertNil(head, @"queue should be empty, but contained head");
          FX_END_SYNC();
@@ -108,19 +108,19 @@ NSString *const FXQueueName = @"queue-name";
     
     XCTAssertEqual(2, queue.count, @"wrong queue length");
     
-    [queue loadHead:^(NSDictionary *head)
+    [queue loadHead:^(id head)
      {
          XCTAssertEqualObjects(head, object0, @"wrong head of queue");
      }];
     
     [queue removeHead];
-    [queue loadHead:^(NSDictionary *head)
+    [queue loadHead:^(id head)
      {
          XCTAssertEqualObjects(head, object1, @"wrong head of queue");
      }];
     
     [queue removeHead];
-    [queue loadHead:^(NSDictionary *head)
+    [queue loadHead:^(id head)
      {
          XCTAssertNil(head, @"queue should be empty, but contained head");
          FX_END_SYNC();

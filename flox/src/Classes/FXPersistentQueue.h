@@ -11,7 +11,7 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void (^FXPersistentQueueLoadHeadBlock)(NSDictionary *head);
+typedef void (^FXPersistentQueueLoadHeadBlock)(id head);
 
 /// A queue that uses plist files to persist its contents.
 @interface FXPersistentQueue : NSObject
@@ -29,11 +29,11 @@ typedef void (^FXPersistentQueueLoadHeadBlock)(NSDictionary *head);
 /// -------------
 
 /// Inserts an object at the beginning of the queue.
-- (void)enqueueObject:(NSDictionary *)object;
+- (void)enqueueObject:(id)object;
 
 /// Inserts an object at the beginning of the queue.
 /// You can optionally add meta data that is stored in the index file.
-- (void)enqueueObject:(NSDictionary *)object withMetaData:(NSDictionary *)metaData;
+- (void)enqueueObject:(id)object withMetaData:(NSDictionary *)metaData;
 
 /// Asynchronously loads the object at the head of the queue.
 /// If the queue is empty, the callback will be executed with a `nil` value.
