@@ -13,6 +13,7 @@
 #import "FXRestService.h"
 #import "FXURLConnection.h"
 #import "FXPersistentQueue.h"
+#import "FXPersistentStore.h"
 #import "Flox_Internal.h"
 #import "NSJSONSerialization+String.h"
 #import "NSString+Flox.h"
@@ -24,6 +25,7 @@
     NSString *_gameKey;
 
     FXPersistentQueue *_queue;
+    FXPersistentStore *_cache;
     BOOL _processingQueue;
 }
 
@@ -35,6 +37,7 @@
         _gameID  = [gameID copy];
         _gameKey = [gameKey copy];
         _queue   = [[FXPersistentQueue alloc] initWithName:gameID];
+        _cache   = [[FXPersistentStore alloc] initWithName:gameID];
     }
     return self;
 }
@@ -55,7 +58,7 @@
     NSDictionary *floxHeader = @{
       @"sdk": @{
         @"type": @"objc",
-        @"version": @"0.1" }, // TODO: add version
+        @"version": [Flox version] },
       @"player": @{
         @"id":        authentication.playerID,
         @"authType":  authentication.type,
