@@ -24,7 +24,8 @@
     NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
     FXURLConnection *connection = [[FXURLConnection alloc] initWithRequest:request];
     
-    [connection startWithBlock:^(NSData *body, NSInteger httpStatus, NSError *error)
+    [connection startWithBlock:^(NSData *body, NSDictionary *headers,
+                                 NSInteger httpStatus, NSError *error)
     {
         XCTAssertNil(error, @"request returned error: %@", error);
         

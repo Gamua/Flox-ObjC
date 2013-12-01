@@ -191,4 +191,31 @@
     FX_WAIT_FOR_SYNC();
 }
 
+- (void)testCache
+{
+    FX_START_SYNC();
+    
+    CustomEntity *origEntity = [[CustomEntity alloc] initWithName:@"hilde" age:19];
+    [origEntity save:^(id entity, NSInteger httpStatus, NSError *error)
+    {
+        FX_ABORT_SYNC_ON_ERROR(error, @"could not save entity");
+        
+        Flox.service.alwaysFail = YES; // now go "offline"
+        
+        [CustomEntity loadByID:origEntity.id onComplete:^(id entity, NSInteger httpStatus, NSError *error)
+         {
+             Flox.service.alwaysFail = NO;
+             
+             XCTAssertNotNil(error, @"no error even though 'alwaysFail' is enabled");
+             XCTAssertNotNil(entity, @"entity not received from cache");
+             XCTAssertEqualObjects([entity id], origEntity.id, @"wrong entity id");
+             XCTAssertEqualObjects([entity name], origEntity.name, @"wrong entity name");
+             
+             FX_END_SYNC();
+         }];
+    }];
+    
+    FX_WAIT_FOR_SYNC();
+}
+
 @end

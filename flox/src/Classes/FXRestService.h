@@ -69,4 +69,7 @@ typedef void (^FXRequestCompleteBlock)(id body, NSInteger httpStatus, NSError *e
 /// The key that identifies the game.
 @property (nonatomic, readonly) NSString *gameKey;
 
+/// If enabled, all requests will fail. Useful mainly for unit testing.
+@property (nonatomic, assign) BOOL alwaysFail;
+
 @end

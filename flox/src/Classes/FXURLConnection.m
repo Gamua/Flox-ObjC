@@ -16,6 +16,7 @@
     NSURLConnection *_connection;
     NSInteger _responseStatus;
     NSMutableData *_responseData;
+    NSDictionary *_responseHeaders;
     FXURLConnectionCompleteBlock _onComplete;
 }
 
@@ -52,7 +53,8 @@
     NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
     
     _responseData = [[NSMutableData alloc] init];
-    _responseStatus = httpResponse.statusCode;
+    _responseStatus  = httpResponse.statusCode;
+    _responseHeaders = httpResponse.allHeaderFields;
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
@@ -62,16 +64,18 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-    _onComplete(_responseData, _responseStatus, NULL);
+    _onComplete(_responseData, _responseHeaders, _responseStatus, NULL);
     _onComplete = nil;
     _responseData = nil;
+    _responseHeaders = nil;
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
-    _onComplete(nil, _responseStatus, error);
+    _onComplete(nil, _responseHeaders, _responseStatus, error);
     _onComplete = nil;
     _responseData = nil;
+    _responseHeaders = nil;
 }
 
 @end

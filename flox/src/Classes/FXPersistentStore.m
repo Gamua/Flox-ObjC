@@ -76,17 +76,21 @@ static dispatch_queue_t ioQueue = NULL;
 {
     NSString *name = _index[key][@"name"];
     
-    dispatch_queue_t origQueue = dispatch_get_current_queue();
-    dispatch_async(ioQueue, ^
+    if (name)
     {
-        NSString *path = [self pathForResource:name];
-        id object = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
-        
-        // file may be corrupted -- delete it
-        if (!object) [[NSFileManager defaultManager] removeItemAtPath:path error:NULL];
-        
-        dispatch_async(origQueue, ^{ block(object); });
-    });
+        dispatch_queue_t origQueue = dispatch_get_current_queue();
+        dispatch_async(ioQueue, ^
+        {
+            NSString *path = [self pathForResource:name];
+            id object = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
+            
+            // file may be corrupted -- delete it
+            if (!object) [[NSFileManager defaultManager] removeItemAtPath:path error:NULL];
+            
+            dispatch_async(origQueue, ^{ block(object); });
+       });
+    }
+    else block(nil);
 }
 
 - (void)removeObjectForKey:(NSString *)key

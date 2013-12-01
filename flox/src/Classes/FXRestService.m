@@ -43,13 +43,35 @@
 }
 
 - (void)requestWithMethod:(NSString *)method path:(NSString *)path data:(NSDictionary *)data
-           authentication:(FXAuthentication *)authentication
+           authentication:(FXAuthentication *)authentication cachedResultBody:(id)cachedBody
                onComplete:(FXRequestCompleteBlock)completeBlock
 {
-    if ([method isEqualToString:FXHTTPMethodGet])
+    BOOL isGetRequest = [method isEqualToString:FXHTTPMethodGet];
+    
+    if (isGetRequest)
     {
-        path = [path stringByAppendingQueryParameters:data];
-        data = nil;
+        if (data)
+        {
+            path = [path stringByAppendingQueryParameters:data];
+            data = nil;
+        }
+        
+        // Even if the cache claims to contain a certain key, it might fail to load it.
+        // For this reason, we have to load the cached result right away; only then do we
+        // know if a cached body is actually available.
+        
+        if (cachedBody == [NSNull null]) cachedBody = nil;
+        else if (!cachedBody)
+        {
+            [_cache loadObjectForKey:path onComplete:^(id object)
+             {
+                 if (!object) object = [NSNull null];
+                 [self requestWithMethod:method path:path data:data authentication:authentication
+                        cachedResultBody:object onComplete:completeBlock];
+             }];
+            
+            return;
+        }
     }
     
     if (!authentication)
@@ -74,11 +96,13 @@
     headers[@"Content-Type"] = @"application/json";
     headers[@"X-Flox"] = [NSJSONSerialization stringWithJSONObject:floxHeader];
     
-    // TODO: add If-None-Match
+    if (isGetRequest && cachedBody)
+        headers[@"If-None-Match"] = [_cache metaDataForKey:path][@"eTag"];
     
     NSString *basePath = [NSString stringWithFormat:@"games/%@", _gameID];
     NSString *fullPath = [basePath stringByAppendingPathComponent:path];
-    NSURL *fullURL = [[NSURL alloc] initWithString:fullPath relativeToURL:_url];
+    NSURL *apiUrl = _alwaysFail ? [NSURL URLWithString:@"http://www.invalid-flox.abc/api"] : _url;
+    NSURL *fullURL = [[NSURL alloc] initWithString:fullPath relativeToURL:apiUrl];
     
     NSError *jsonError;
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:fullURL];
@@ -94,13 +118,12 @@
     {
         FXURLConnection *connection = [[FXURLConnection alloc] initWithRequest:request];
         
-        [connection startWithBlock:^(NSData *bodyData, NSInteger httpStatus, NSError *error)
+        [connection startWithBlock:^(NSData *bodyData, NSDictionary *headers,
+                                     NSInteger httpStatus, NSError *error)
         {
-            // TODO: in case of error, return result from cache
-            
             if (error)
             {
-                completeBlock(nil, httpStatus, error);
+                completeBlock(cachedBody, httpStatus, error);
                 return;
             }
             
@@ -110,25 +133,35 @@
             
             if (jsonError)
             {
-                completeBlock(nil, httpStatus, jsonError);
-                return;
+                completeBlock(cachedBody, httpStatus, jsonError);
             }
-            
-            if (FXHTTPStatusIsSuccess(httpStatus))
+            else if (FXHTTPStatusIsSuccess(httpStatus))
             {
-                if ([method isEqualToString:FXHTTPMethodGet])
+                NSString *eTag = [headers valueForKey:@"ETag"];
+                
+                if (isGetRequest)
                 {
-                    // TODO: check for NotModified
-                    // TODO: add to cache
+                    if (httpStatus == FXHTTPStatusNotModified)
+                        body = cachedBody;
+                    else if (eTag)
+                        [_cache setObject:body forKey:path withMetaData:@{ @"eTag": eTag }];
                 }
                 else if ([method isEqualToString:FXHTTPMethodPut])
                 {
-                    // TODO: update 'createdAt' and 'updatedAt'
-                    // TODO: add to cache
+                    NSString *createdAt = [body valueForKey:@"createdAt"];
+                    NSString *updatedAt = [body valueForKey:@"updatedAt"];
+                    
+                    if (eTag && createdAt && updatedAt)
+                    {
+                        NSMutableDictionary *mutableData = [data mutableCopy];
+                        mutableData[@"createdAt"] = createdAt;
+                        mutableData[@"updatedAt"] = updatedAt;
+                        [_cache setObject:mutableData forKey:path withMetaData:@{ @"eTag": eTag }];
+                    }
                 }
                 else if ([method isEqualToString:FXHTTPMethodDelete])
                 {
-                    // TODO: remove from cache
+                    [_cache removeObjectForKey:path];
                 }
                 
                 completeBlock(body, httpStatus, nil);
@@ -137,10 +170,18 @@
             {
                 NSError *error = [[NSError alloc] initWithDomain:@"FXRestService" code:httpStatus
                                                         userInfo:body];
-                completeBlock(nil, httpStatus, error);
+                completeBlock(cachedBody, httpStatus, error);
             }
         }];
     }
+}
+
+- (void)requestWithMethod:(NSString *)method path:(NSString *)path data:(NSDictionary *)data
+           authentication:(FXAuthentication *)authentication
+               onComplete:(FXRequestCompleteBlock)completeBlock
+{
+    [self requestWithMethod:method path:path data:data authentication:authentication
+           cachedResultBody:nil onComplete:completeBlock];
 }
 
 - (void)requestWithMethod:(NSString *)method path:(NSString *)path data:(NSDictionary *)data
@@ -165,8 +206,16 @@
                              onComplete:completeBlock];
             else
             {
-                // TODO: try to get body from cache
-                completeBlock(nil, httpStatus, error);
+                // try to get body from cache
+                if ([method isEqualToString:FXHTTPMethodGet])
+                {
+                    NSString *key = [path stringByAppendingQueryParameters:data];
+                    [_cache loadObjectForKey:key onComplete:^(id object)
+                     {
+                         completeBlock(object, httpStatus, error);
+                     }];
+                }
+                else completeBlock(nil, httpStatus, error);
             }
         }];
     }
@@ -183,7 +232,10 @@
     
     if ([method isEqualToString:FXHTTPMethodPut])
     {
-        // TODO: save data to cache
+        // To allow developers to use Flox offline, we're optimistic here:
+        // even though the operation might fail, we're saving the object in the cache.
+        [_cache setObject:data forKey:path];
+        
         // TODO: filter redundant queue contents
     }
     

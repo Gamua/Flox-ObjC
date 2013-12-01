@@ -12,7 +12,8 @@
 #import <Foundation/Foundation.h>
 #import "FXCommon.h"
 
-typedef void (^FXURLConnectionCompleteBlock)(NSData *body, NSInteger httpStatus, NSError *error);
+typedef void (^FXURLConnectionCompleteBlock)(NSData *body, NSDictionary *headers,
+                                             NSInteger httpStatus, NSError *error);
 
 /// A wrapper over NSURLConnection that simplifies its usage by routing the result into
 /// a simple block.

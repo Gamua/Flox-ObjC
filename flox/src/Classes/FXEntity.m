@@ -107,7 +107,7 @@ static NSString *const NSDateType = @"@\"NSDate\"";
                          onComplete:^(id body, NSInteger httpStatus, NSError *error)
     {
         FXEntity *entity = nil;
-        if (!error) entity = [[self alloc] initWithID:entityID dictionary:body];
+        if (body) entity = [[self alloc] initWithID:entityID dictionary:body];
         onComplete(entity, httpStatus, error);
     }];
 }
