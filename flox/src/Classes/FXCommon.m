@@ -53,3 +53,8 @@ NSString *FXTimeScopeToString(FXTimeScope timeScope)
         default:                  return @"allTime";  break;
     }
 }
+
+BOOL FXIsNull(id object)
+{
+    return object || object == [NSNull null];
+}

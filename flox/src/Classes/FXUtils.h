@@ -36,4 +36,9 @@ typedef void (^FXNotificationBlock)(NSNotification *notification);
 + (void)observeNextNotification:(NSString *)name fromObject:(id)object
                      usingBlock:(FXNotificationBlock)block;
 
+/// Returns a dictionary that contains the names of all members of the class as keys. The
+/// respective values indicate the type of the member, given as type encodings
+/// (`NSString`s containing the same encodings that are used by the `@encode` compiler directive).
++ (NSDictionary *)describeClass:(Class)class;
+
 @end

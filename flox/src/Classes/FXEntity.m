@@ -9,12 +9,12 @@
 //  in accordance with the terms of the accompanying license agreement.
 //
 
-#import <objc/runtime.h>
-
 #import "Flox_Internal.h"
 #import "FXEntity_Internal.h"
 #import "FXCommon.h"
 #import "FXUtils.h"
+#import "FXQuery.h"
+#import "NSObject+Flox.h"
 
 static NSString *const NSDateType = @"@\"NSDate\"";
 
@@ -137,6 +137,26 @@ static NSString *const NSDateType = @"@\"NSDate\"";
     [Flox.service requestQueuedWithMethod:FXHTTPMethodDelete path:path data:nil];
 }
 
+#pragma region - query
+
++ (FXQuery *)query
+{
+    return [[FXQuery alloc] initWithClass:self];
+}
+
++ (FXQuery *)queryWhere:(NSString *)constraints, ...
+{
+    va_list args;
+    va_start(args, constraints);
+    
+    FXQuery *query = [self query];
+    [query where:constraints arguments:args];
+    
+    va_end(args);
+    
+    return query;
+}
+
 #pragma region - helpers
 
 + (NSString *)urlForType:(NSString *)type id:(NSString *)id
@@ -151,7 +171,7 @@ static NSString *const NSDateType = @"@\"NSDate\"";
 
 + (void)refreshEntity:(FXEntity *)entity fromDictionary:(NSDictionary *)dictionary
 {
-    NSDictionary *ivars = [self describeClass:[entity class]];
+    NSDictionary *ivars = [FXUtils describeClass:[entity class]];
     
     for(id key in dictionary)
     {
@@ -165,32 +185,6 @@ static NSString *const NSDateType = @"@\"NSDate\"";
         
         [entity setValue:value forKey:name];
     }
-}
-
-+ (NSDictionary *)describeClass:(Class)class
-{
-    NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
-    NSStringEncoding utf8 = NSUTF8StringEncoding;
-    unsigned int count;
-    
-    do
-    {
-        Ivar* ivars = class_copyIvarList(class, &count);
-        
-        for (int i = 0; i < count; ++i)
-        {
-            Ivar ivar = ivars[i];
-            NSString *name = [NSString stringWithCString:ivar_getName(ivar) encoding:utf8];
-            NSString *type = [NSString stringWithCString:ivar_getTypeEncoding(ivar) encoding:utf8];
-            dictionary[name] = type;
-        }
-        
-        free(ivars);
-        class = [class superclass];
-    }
-    while (class != [NSObject class]);
-    
-    return dictionary;
 }
 
 #pragma region - properties
@@ -266,21 +260,24 @@ static NSString *const NSDateType = @"@\"NSDate\"";
 
         if (dictionary)
         {
-            NSDictionary *ivars = [FXEntity describeClass:[self class]];
+            NSDictionary *ivars = [FXUtils describeClass:[self class]];
             
             for(id key in dictionary)
             {
                 id value = dictionary[key];
 
-                if (value != [NSNull null])
+                if ([value hasValue])
                 {
                     NSString *name = [@"_" stringByAppendingString:key];
                     NSString *type = ivars[name];
-
-                    if ([type isEqualToString:NSDateType]) // dates are encoded as xs:DateTime
-                        value = [FXUtils dateFromString:value];
                     
-                    [self setValue:value forKey:name];
+                    if (type)
+                    {
+                        if ([type isEqualToString:NSDateType]) // dates are encoded as xs:DateTime
+                            value = [FXUtils dateFromString:value];
+                        
+                        [self setValue:value forKey:name];
+                    }
                 }
             }
         }
@@ -297,7 +294,7 @@ static NSString *const NSDateType = @"@\"NSDate\"";
 - (NSDictionary *)encodeToDictionary
 {
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
-    NSDictionary *ivars = [FXEntity describeClass:[self class]];
+    NSDictionary *ivars = [FXUtils describeClass:[self class]];
 
     for (NSString *name in ivars)
     {
@@ -315,6 +312,23 @@ static NSString *const NSDateType = @"@\"NSDate\"";
     }
     
     return dictionary;
+}
+
++ (void)loadFromCacheByID:(NSString *)entityID eTag:(NSString *)eTag
+               onComplete:(FXEntityLoadedFromCacheBlock)onComplete
+{
+    if (self == [FXEntity class])
+        [NSException raise:FXExceptionInvalidOperation
+                    format:@"This method must be called on a specific subclass of FXEntity."];
+    
+    NSString *path = [self urlForType:self.type id:entityID];
+    
+    [Flox.service loadFromCache:path data:nil eTag:eTag onComplete:^(id body)
+     {
+         FXEntity *entity = nil;
+         if (body) entity = [[self alloc] initWithID:entityID dictionary:body];
+         onComplete(entity);
+     }];
 }
 
 @end

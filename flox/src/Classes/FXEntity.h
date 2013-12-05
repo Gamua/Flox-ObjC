@@ -14,6 +14,8 @@
 
 typedef void (^FXEntityRequestCompleteBlock)(id entity, NSInteger httpStatus, NSError *error);
 
+@class FXQuery;
+
 /** ------------------------------------------------------------------------------------------------
  
  The abstract base class of all objects that can be stored persistently on the Flox server.
@@ -124,6 +126,13 @@ typedef void (^FXEntityRequestCompleteBlock)(id entity, NSInteger httpStatus, NS
 /// The server type that instances of this class will have. Per default, that's the name of the
 /// class. Implement this method in subclasses for a custom mapping.
 + (NSString *)type;
+
+/// Creates a new query for this entity type.
++ (FXQuery *)query;
+
+/// Creates a new query for this entity type, initialized with the given constraints string.
+/// Read the documentation of the `FXQuery` class to find out how that string must look like.
++ (FXQuery *)queryWhere:(NSString *)constraints, ...;
 
 /// ----------------
 /// @name Properties

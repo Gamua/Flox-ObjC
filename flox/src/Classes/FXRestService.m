@@ -17,6 +17,7 @@
 #import "Flox_Internal.h"
 #import "NSJSONSerialization+String.h"
 #import "NSString+Flox.h"
+#import "NSObject+Flox.h"
 
 @implementation FXRestService
 {
@@ -209,10 +210,9 @@
                 // try to get body from cache
                 if ([method isEqualToString:FXHTTPMethodGet])
                 {
-                    NSString *key = [path stringByAppendingQueryParameters:data];
-                    [_cache loadObjectForKey:key onComplete:^(id object)
+                    [self loadFromCache:path data:data eTag:nil onComplete:^(id body)
                      {
-                         completeBlock(object, httpStatus, error);
+                        completeBlock(body, httpStatus, error);
                      }];
                 }
                 else completeBlock(nil, httpStatus, error);
@@ -336,6 +336,23 @@
 - (void)clearQueue
 {
     [_queue removeAllObjects];
+}
+
+- (void)clearCache
+{
+    [_cache removeAllObjects];
+}
+
+- (void)loadFromCache:(NSString *)path data:(NSDictionary *)data eTag:(NSString *)eTag
+           onComplete:(FXLoadedFromCacheBlock)block
+{
+    NSString *key = [path stringByAppendingQueryParameters:data];
+    NSString *existingETag = [_cache metaDataForKey:key][@"eTag"];
+
+    if (![eTag hasValue] || [eTag isEqualToString:existingETag])
+        [_cache loadObjectForKey:key onComplete:block];
+    else
+        block(nil);
 }
 
 @end

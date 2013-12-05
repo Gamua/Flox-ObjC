@@ -39,7 +39,7 @@ NSString *const FXQueueName = @"queue-name";
     [queue enqueueObject:object1];
     [queue enqueueObject:object2];
     
-    XCTAssertEqual(3, queue.count, @"wrong queue count");
+    XCTAssertEqual(3, (int)queue.count, @"wrong queue count");
     
     [queue loadHead:^(id head)
      {
@@ -57,7 +57,7 @@ NSString *const FXQueueName = @"queue-name";
          XCTAssertEqualObjects(head, object1, @"wrong head of queue");
      }];
     
-    XCTAssertEqual(2, queue.count, @"wrong queue count");
+    XCTAssertEqual(2, (int)queue.count, @"wrong queue count");
     
     [queue enqueueObject:object0];
     [queue loadHead:^(id head)
@@ -65,7 +65,7 @@ NSString *const FXQueueName = @"queue-name";
          XCTAssertEqualObjects(head, object1, @"wrong head of queue");
      }];
     
-    XCTAssertEqual(3, queue.count, @"wrong queue count");
+    XCTAssertEqual(3, (int)queue.count, @"wrong queue count");
     
     [queue removeHead];
     [queue loadHead:^(id head)
@@ -86,7 +86,7 @@ NSString *const FXQueueName = @"queue-name";
          FX_END_SYNC();
      }];
 
-    XCTAssertEqual(0, queue.count, @"wrong queue count");
+    XCTAssertEqual(0, (int)queue.count, @"wrong queue count");
     
     FX_WAIT_FOR_SYNC();
 }
@@ -106,7 +106,7 @@ NSString *const FXQueueName = @"queue-name";
     
     queue = [[FXPersistentQueue alloc] initWithName:FXQueueName];
     
-    XCTAssertEqual(2, queue.count, @"wrong queue length");
+    XCTAssertEqual(2, (int)queue.count, @"wrong queue length");
     
     [queue loadHead:^(id head)
      {
@@ -140,7 +140,7 @@ NSString *const FXQueueName = @"queue-name";
     [queue enqueueObject:object1];
     [queue removeAllObjects];
     
-    XCTAssertEqual(0, queue.count, @"wrong queue count");
+    XCTAssertEqual(0, (int)queue.count, @"wrong queue count");
 }
 
 @end

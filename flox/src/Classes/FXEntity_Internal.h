@@ -11,10 +11,15 @@
 
 #import "FXEntity.h"
 
+typedef void (^FXEntityLoadedFromCacheBlock)(id entity);
+
 @interface FXEntity (Internal)
 
 - (instancetype)initWithID:(NSString *)entityID dictionary:(NSDictionary *)dictionary;
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 - (NSDictionary *)encodeToDictionary;
+
++ (void)loadFromCacheByID:(NSString *)entityID eTag:(NSString *)eTag
+               onComplete:(FXEntityLoadedFromCacheBlock)onComplete;
 
 @end

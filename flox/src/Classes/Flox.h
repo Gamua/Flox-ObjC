@@ -14,6 +14,8 @@
 #import "FXScore.h"
 #import "FXUtils.h"
 #import "FXCommon.h"
+#import "FXEntity.h"
+#import "FXQuery.h"
 
 typedef void (^FXScoresLoadedBlock)(NSArray *scores, NSError *error);
 

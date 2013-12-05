@@ -13,6 +13,7 @@
 #import "FXURLConnection.h"
 
 typedef void (^FXRequestCompleteBlock)(id body, NSInteger httpStatus, NSError *error);
+typedef void (^FXLoadedFromCacheBlock)(id body);
 
 /// A class that makes it easy to communicate with the Flox server via a REST protocol.
 @interface FXRestService : NSObject <NSURLConnectionDataDelegate>
@@ -53,8 +54,16 @@ typedef void (^FXRequestCompleteBlock)(id body, NSInteger httpStatus, NSError *e
 /// Clears the persistent queue.
 - (void)clearQueue;
 
+/// Clears all data from the cache.
+- (void)clearCache;
+
 /// Saves request queue and cache index to the disk.
 - (void)save;
+
+/// Loads an object from the cache. If you pass a non-nil `eTag`, the cached object must match
+/// the eTag to be returned.
+- (void)loadFromCache:(NSString *)path data:(NSDictionary *)data eTag:(NSString *)eTag
+           onComplete:(FXLoadedFromCacheBlock)block;
 
 /// ----------------
 /// @name Properties

@@ -18,7 +18,10 @@
 		DE204EFA181E664700FD9220 /* FXPersistentQueueTest.m in Sources */ = {isa = PBXBuildFile; fileRef = DE204EF9181E664700FD9220 /* FXPersistentQueueTest.m */; };
 		DE204EFC181EA8C900FD9220 /* FXScoreTest.m in Sources */ = {isa = PBXBuildFile; fileRef = DE204EFB181EA8C900FD9220 /* FXScoreTest.m */; };
 		DE29B40C181E460000242381 /* FXUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = DE29B40B181E460000242381 /* FXUtils.m */; };
+		DE2D8942184BB84F00546FD5 /* FXQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = DE2D8941184BB84F00546FD5 /* FXQuery.m */; };
+		DE2D8946184BE26800546FD5 /* FXQueryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = DE2D8945184BE26800546FD5 /* FXQueryTest.m */; };
 		DE4940F7181EC85D00FBD160 /* NSString+Flox.m in Sources */ = {isa = PBXBuildFile; fileRef = DE4940F6181EC85D00FBD160 /* NSString+Flox.m */; };
+		DE61547A1850BB8C001ACD6F /* NSObject+Flox.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6154791850BB8C001ACD6F /* NSObject+Flox.m */; };
 		DE6BF26418101EFB004F80FA /* FXURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6BF26318101EFB004F80FA /* FXURLConnection.m */; };
 		DE6BF266181021A2004F80FA /* FXURLConnectionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6BF265181021A2004F80FA /* FXURLConnectionTests.m */; };
 		DE6BF26918102E9F004F80FA /* NSJSONSerialization+String.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6BF26818102E9F004F80FA /* NSJSONSerialization+String.m */; };
@@ -84,9 +87,14 @@
 		DE204EFB181EA8C900FD9220 /* FXScoreTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXScoreTest.m; sourceTree = "<group>"; };
 		DE29B40A181E460000242381 /* FXUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXUtils.h; sourceTree = "<group>"; };
 		DE29B40B181E460000242381 /* FXUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXUtils.m; sourceTree = "<group>"; };
+		DE2D8940184BB84F00546FD5 /* FXQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXQuery.h; sourceTree = "<group>"; };
+		DE2D8941184BB84F00546FD5 /* FXQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXQuery.m; sourceTree = "<group>"; };
+		DE2D8945184BE26800546FD5 /* FXQueryTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXQueryTest.m; sourceTree = "<group>"; };
 		DE3CE634182F79B2001EFB6F /* FXEntity_Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FXEntity_Internal.h; sourceTree = "<group>"; };
 		DE4940F5181EC85D00FBD160 /* NSString+Flox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Flox.h"; sourceTree = "<group>"; };
 		DE4940F6181EC85D00FBD160 /* NSString+Flox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Flox.m"; sourceTree = "<group>"; };
+		DE6154781850BB8C001ACD6F /* NSObject+Flox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Flox.h"; sourceTree = "<group>"; };
+		DE6154791850BB8C001ACD6F /* NSObject+Flox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Flox.m"; sourceTree = "<group>"; };
 		DE6BF26218101EFB004F80FA /* FXURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXURLConnection.h; sourceTree = "<group>"; };
 		DE6BF26318101EFB004F80FA /* FXURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXURLConnection.m; sourceTree = "<group>"; };
 		DE6BF265181021A2004F80FA /* FXURLConnectionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXURLConnectionTests.m; sourceTree = "<group>"; };
@@ -152,6 +160,8 @@
 				DE6BF26818102E9F004F80FA /* NSJSONSerialization+String.m */,
 				DE4940F5181EC85D00FBD160 /* NSString+Flox.h */,
 				DE4940F6181EC85D00FBD160 /* NSString+Flox.m */,
+				DE6154781850BB8C001ACD6F /* NSObject+Flox.h */,
+				DE6154791850BB8C001ACD6F /* NSObject+Flox.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -238,6 +248,8 @@
 				DE148470182A9CD3001DB4A1 /* FXEntity.m */,
 				DE08E4651832C67B00FE770F /* FXPlayer.h */,
 				DE08E4661832C67B00FE770F /* FXPlayer.m */,
+				DE2D8940184BB84F00546FD5 /* FXQuery.h */,
+				DE2D8941184BB84F00546FD5 /* FXQuery.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -256,6 +268,7 @@
 				DE204EFB181EA8C900FD9220 /* FXScoreTest.m */,
 				DE148475182AE542001DB4A1 /* FXEntityTest.m */,
 				DE1509891834FC7A0029F8B6 /* FXPlayerTest.m */,
+				DE2D8945184BE26800546FD5 /* FXQueryTest.m */,
 			);
 			path = UnitTests;
 			sourceTree = "<group>";
@@ -360,12 +373,14 @@
 				DE90F65918228FD000632993 /* FXGameSession.m in Sources */,
 				DE90F65C1822954700632993 /* FXCapabilities.m in Sources */,
 				DEFF18C11848B49E00C77D46 /* FXPersistentStore.m in Sources */,
+				DE2D8942184BB84F00546FD5 /* FXQuery.m in Sources */,
 				DEA3F96A181AA08400516287 /* FXPersistentQueue.m in Sources */,
 				DE08E4671832C67B00FE770F /* FXPlayer.m in Sources */,
 				DEF16CAD18341EEC00199081 /* FXAuthentication.m in Sources */,
 				DE6BF26918102E9F004F80FA /* NSJSONSerialization+String.m in Sources */,
 				DE90F65F1822A1CE00632993 /* FXInstallationData.m in Sources */,
 				DE0367FB18044A9400C16280 /* FXRestService.m in Sources */,
+				DE61547A1850BB8C001ACD6F /* NSObject+Flox.m in Sources */,
 				DEB7024E18111FDC000D295E /* FXTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -382,6 +397,7 @@
 				DEFF18C31848C29000C77D46 /* FXPersistentStoreTest.m in Sources */,
 				DE0367F418042D7400C16280 /* FXUtilsTests.m in Sources */,
 				DE14847A182AE5F7001DB4A1 /* CustomEntity.m in Sources */,
+				DE2D8946184BE26800546FD5 /* FXQueryTest.m in Sources */,
 				DE1509881834FC430029F8B6 /* CustomPlayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

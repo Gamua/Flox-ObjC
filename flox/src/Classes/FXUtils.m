@@ -10,6 +10,7 @@
 //
 
 #import "FXUtils.h"
+#import <objc/runtime.h>
 
 @implementation FXUtils
 
@@ -72,6 +73,32 @@
         [[NSNotificationCenter defaultCenter] removeObserver:observer];
         block(notification);
     }];
+}
+
++ (NSDictionary *)describeClass:(Class)class
+{
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+    NSStringEncoding utf8 = NSUTF8StringEncoding;
+    unsigned int count;
+    
+    do
+    {
+        Ivar* ivars = class_copyIvarList(class, &count);
+        
+        for (int i = 0; i < count; ++i)
+        {
+            Ivar ivar = ivars[i];
+            NSString *name = [NSString stringWithCString:ivar_getName(ivar) encoding:utf8];
+            NSString *type = [NSString stringWithCString:ivar_getTypeEncoding(ivar) encoding:utf8];
+            dictionary[name] = type;
+        }
+        
+        free(ivars);
+        class = [class superclass];
+    }
+    while (class != [NSObject class]);
+    
+    return dictionary;
 }
 
 @end
