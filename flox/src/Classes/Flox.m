@@ -294,7 +294,7 @@ static void FXLog(NSString *format, ...)
 
 + (NSString *)version
 {
-    return @"0.1";
+    return @"0.7";
 }
 
 + (NSString *)installationID
