@@ -30,9 +30,9 @@ typedef void (^FXAddEntityBlock)(int position, FXEntity *entity);
 {
     if ((self = [super init]))
     {
-        if (![_entityClass isSubclassOfClass:[FXEntity class]])
-            [NSException raise:FXExceptionInvalidOperation
-                        format:@"The entity class must extend 'FXEntity'"];
+        if (![entityClass isSubclassOfClass:[FXEntity class]])
+             [NSException raise:FXExceptionInvalidOperation
+                         format:@"The entity class must extend 'FXEntity'"];
         
         _entityClass = entityClass;
         _constraints = @"";
