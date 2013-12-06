@@ -39,6 +39,11 @@ static NSString *const NSDateType = @"@\"NSDate\"";
     return [self initWithID:[FXUtils randomUID]];
 }
 
++ (instancetype)entity
+{
+    return [[self alloc] init];
+}
+
 #pragma region - request methods
 
 - (void)save:(FXEntityRequestCompleteBlock)onComplete

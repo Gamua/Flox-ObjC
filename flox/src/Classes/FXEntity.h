@@ -74,6 +74,7 @@ typedef void (^FXEntityRequestCompleteBlock)(id entity, NSInteger httpStatus, NS
 - (instancetype)init;
 
 /// Initializes an entity with a certain UID. (Abstract class! To be called from a subclass only.)
+/// _Designated Initializer_.
 - (instancetype)initWithID:(NSString *)entityID;
 
 /// -------------
@@ -133,6 +134,9 @@ typedef void (^FXEntityRequestCompleteBlock)(id entity, NSInteger httpStatus, NS
 /// Creates a new query for this entity type, initialized with the given constraints string.
 /// Read the documentation of the `FXQuery` class to find out how that string must look like.
 + (FXQuery *)queryWhere:(NSString *)constraints, ...;
+
+/// Factory Method. Only call on subclasses!
++ (instancetype)entity;
 
 /// ----------------
 /// @name Properties
