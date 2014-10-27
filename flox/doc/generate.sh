@@ -21,9 +21,13 @@ appledoc \
   --explicit-crossref \
   --ignore ".m" \
   --ignore "_Internal.h" \
+  --ignore "NSJSONSerialization+String.h" \
+  --ignore "NSString+Flox.h" \
+  --ignore "NSObject+Flox.h" \
   --ignore "FXRestService.h" \
   --ignore "FXURLConnection.h" \
   --ignore "FXPersistentQueue.h" \
+  --ignore "FXPersistentStore.h" \
   --ignore "FXGameSession.h" \
   --ignore "FXCapabilities.h" \
   --ignore "FXInstallationData.h" \
