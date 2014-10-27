@@ -53,6 +53,7 @@
     FX_START_SYNC();
     
     [FXPlayer loginGuest]; // to get new ownership each time this test executes
+    NSString *guestID = [FXPlayer current].id;
     
     CustomEntity *e0 = [[CustomEntity alloc] initWithName:@"a" age:40];
     CustomEntity *e1 = [[CustomEntity alloc] initWithName:@"b" age:30];
@@ -72,7 +73,8 @@
         [e2 saveQueued];
         [e3 saveQueued];
         
-        FXQuery *query = [CustomEntity queryWhere:@"name > ? AND name < ?", @"a", @"d"];
+        FXQuery *query = [CustomEntity queryWhere:@"name > ? AND name < ? AND ownerId == ?",
+                          @"a", @"d", guestID];
         [query find:^(NSArray *entities, NSInteger httpStatus, NSError *error)
          {
              FX_ABORT_SYNC_ON_ERROR(error, @"could not execute query");
