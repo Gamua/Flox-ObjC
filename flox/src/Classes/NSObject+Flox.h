@@ -11,9 +11,10 @@
 
 #import <Foundation/Foundation.h>
 
+/// A category that adds misc helpers to the NSObject class (utilized by Flox in different places).
 @interface NSObject (Flox)
 
-// Indicates if the receiver points to a value or if it is `nil` / `[NSNull null]`.
+/// Indicates if the receiver points to a value or if it is `nil` / `[NSNull null]`.
 - (BOOL)hasValue;
 
 @end
