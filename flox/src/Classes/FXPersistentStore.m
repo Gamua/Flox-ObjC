@@ -78,7 +78,6 @@ static dispatch_queue_t ioQueue = NULL;
     
     if (name)
     {
-        dispatch_queue_t origQueue = dispatch_get_current_queue();
         dispatch_async(ioQueue, ^
         {
             NSString *path = [self pathForResource:name];
@@ -87,7 +86,7 @@ static dispatch_queue_t ioQueue = NULL;
             // file may be corrupted -- delete it
             if (!object) [[NSFileManager defaultManager] removeItemAtPath:path error:NULL];
             
-            dispatch_async(origQueue, ^{ block(object); });
+            dispatch_async(dispatch_get_main_queue(), ^{ block(object); });
        });
     }
     else block(nil);
