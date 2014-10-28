@@ -389,6 +389,7 @@ static void FXLog(NSString *format, ...)
     
     [self observeApplicationNotifications:YES];
     [self startNewGameSession];
+    [self saveLocalData];
     [self logInfo:@"Game started"];
 }
 
