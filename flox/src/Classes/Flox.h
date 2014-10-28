@@ -16,6 +16,7 @@
 #import "FXCommon.h"
 #import "FXEntity.h"
 #import "FXQuery.h"
+#import "FXPlayer.h"
 
 typedef void (^FXScoresLoadedBlock)(NSArray *scores, NSError *error);
 
