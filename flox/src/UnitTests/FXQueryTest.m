@@ -43,8 +43,6 @@
                           @"name == \"%@\" AND (age < %d OR birthday < \"%@\") AND age IN [5,7,9]",
                           name, age, dateString];
     
-    NSLog(@"constraints: %@", query.constraints);
-    
     XCTAssertEqualObjects(expected, query.constraints, @"constraints were built in the wrong way");
 }
 

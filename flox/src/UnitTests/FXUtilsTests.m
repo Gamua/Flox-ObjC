@@ -28,7 +28,7 @@
 
 - (void)testStringFromDate
 {
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
     dateComponents.year = 2013;
     dateComponents.month = 10;
@@ -43,9 +43,6 @@
     NSString *expectedXmlDate = @"2013-10-08T13:36:02.000Z";
     
     XCTAssertEqualObjects(xmlDate, expectedXmlDate, @"date not formatted correctly");
-    
-    NSDate *now = [[NSDate alloc] init];
-    NSLog(@"%@", [FXUtils stringFromDate:now]);
     
     NSDate *laterDate = [NSDate dateWithTimeInterval:0.123 sinceDate:date];
     xmlDate = [FXUtils stringFromDate:laterDate];
